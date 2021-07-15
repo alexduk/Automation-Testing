@@ -10,6 +10,11 @@ public class Extensions extends Infra{
         element.click();
     }
 
+    public static String getText(WebElement element){
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
+        return element.getText();
+    }
+
     public static void sendKeys(WebElement element, String text){
         webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
         element.sendKeys(text);

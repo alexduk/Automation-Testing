@@ -2,7 +2,6 @@ package pageFactory;
 
 import common.Extensions;
 import common.Infra;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +13,7 @@ public class LoginPage extends Infra {
     WebElement password;
     @FindBy(css = "button[type='submit']")
     WebElement login;
+    @FindBy(xpath = "//li[@class='ng-binding ng-scope']") WebElement invalidLogin;
 
     public LoginPage(){
         PageFactory.initElements(driver, this);
@@ -35,5 +35,9 @@ public class LoginPage extends Infra {
         this.setEmail(strEmail);
         this.setPassword(strPassword);
         this.clickLogin();
+    }
+
+    public String getInvalidLoginText(){
+        return Extensions.getText(invalidLogin).trim();
     }
 }
