@@ -11,6 +11,9 @@ public class HomePage extends Infra {
     @FindBy(linkText = "conduit") WebElement title;
     //@FindBy(xpath = "//a[contains(text(), 'conduit') and @class='navbar-brand ng-binding']") WebElement title;
     @FindBy(xpath = "//a[@class='nav-link ng-binding']") WebElement username;
+    @FindBy(partialLinkText = "Settings") WebElement settingsButton;
+    @FindBy(partialLinkText = "New Article") WebElement newArticleButton;
+    @FindBy(partialLinkText = "Your Feed") WebElement yourFeed;
 
     public HomePage() {
         PageFactory.initElements(driver, this);
@@ -20,8 +23,20 @@ public class HomePage extends Infra {
         return Extensions.scriptGetHrefText(title);
     }
 
-    public void goToLogin(){
+    public void goToLoginPage(){
         Extensions.scriptClick(loginButton);
+    }
+
+    public void goToSettingsPage(){
+        Extensions.scriptClick(settingsButton);
+    }
+
+    public void goToNewArticlePage(){
+        Extensions.scriptClick(newArticleButton);
+    }
+
+    public String yourFeedSection(){
+        return Extensions.getText(yourFeed).trim();
     }
 
     public String getLoggedInUser(){

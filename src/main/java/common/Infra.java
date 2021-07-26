@@ -16,12 +16,20 @@ public class Infra {
     public static WebDriverWait webDriverWait;
     public static JavascriptExecutor executor;
 
+    public static String websiteUrl = "https://demo.productionready.io/#/";
+    public static String email = "alexalexd@gmail.com";
+    public static String password = "alexalex";
+    public static String sArticleTitle = "static article title";
+    public static String sArticleAbout = "static article about";
+    public static String sArticleBody = "static article body";
+    public static String sArticleTags = "static article tag";
+
     public void setupWebDriver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://demo.productionready.io/#/");
+        driver.get(websiteUrl);
         webDriverWait = new WebDriverWait(driver, 5);
         executor = (JavascriptExecutor) driver;
     }
@@ -33,7 +41,6 @@ public class Infra {
         ExcelUtils excel = new ExcelUtils("src/test/java/dataProvider/" + packageName + "/" + testFileName + ".xlsx", m.getName());
         int rowCount = excel.getRowCount();
         int colCount = excel.getColCount();
-
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         for (int i = 1; i < rowCount; i++) {
             if (excel.getCellDataString(i, 0).equals("yes")) {

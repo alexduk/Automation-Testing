@@ -1,28 +1,28 @@
 package test.login;
 
-import common.ExcelUtils;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pageFactory.HomePage;
 import pageFactory.LoginPage;
 import common.Infra;
+import pageFactory.SettingsPage;
 
-import java.lang.reflect.Method;
-
-public class Test1 extends Infra{
+@Test(dataProvider="testData")
+public class Login extends Infra{
     LoginPage objLogin;
     HomePage objHome;
+    SettingsPage objSettings;
 
     @BeforeMethod
     public void setup() {
         setupWebDriver();
         objHome = new HomePage();
         objLogin = new LoginPage();
+        objSettings = new SettingsPage();
     }
 
-    @Test(dataProvider="testData")
-    public void login_test(String testID, String description, String email, String password, String expectedLoginUsername){
-        objHome.goToLogin();
+    public void loginTest(String testID, String description, String email, String password, String expectedLoginUsername) throws InterruptedException {
+        objHome.goToLoginPage();
         objLogin.login(email, password);
 
         String actualUsername = objHome.getLoggedInUser();
@@ -34,9 +34,8 @@ public class Test1 extends Infra{
         Assert.assertEquals(actualHomePageTitle, expectedHomePageTitle);
     }
 
-    @Test(dataProvider="testData")
-    public void invalid_login_test(String testID, String description, String email, String password, String expectedInvalidLogin){
-        objHome.goToLogin();
+    public void invalidLogin_test(String testID, String description, String email, String password, String expectedInvalidLogin){
+        objHome.goToLoginPage();
         objLogin.login(email, password);
 
         String actualInvalidLoginText = objLogin.getInvalidLoginText();

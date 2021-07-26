@@ -43,7 +43,7 @@ public class ExcelUtils {
     }
 
     public static String getCellDataString(int rowNum, int colNum) {
-        String cellData = null;
+        String cellData = "";
 
         try {
             cellData = sheet.getRow(rowNum).getCell(colNum).getStringCellValue();

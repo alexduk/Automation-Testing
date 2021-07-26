@@ -1,7 +1,11 @@
 package common;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Extensions extends Infra{
 
@@ -11,12 +15,13 @@ public class Extensions extends Infra{
     }
 
     public static String getText(WebElement element){
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
+        webDriverWait.until(ExpectedConditions.visibilityOf(element));
         return element.getText();
     }
 
     public static void sendKeys(WebElement element, String text){
         webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
+        element.clear();
         element.sendKeys(text);
     }
 
@@ -38,5 +43,14 @@ public class Extensions extends Infra{
     public static void scriptSendKeys(WebElement element, String value){
         webDriverWait.until(ExpectedConditions.visibilityOf(element));
         executor.executeScript("arguments[0].setAttribute('value', '" + value + "');", element);
+    }
+
+    public static List<String> GetElementsText(List<WebElement> elements){
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(elements));
+        List<String> elementsText = new ArrayList<>();
+        for (WebElement element : elements){
+            elementsText.add(element.getText());
+        }
+        return elementsText;
     }
 }
