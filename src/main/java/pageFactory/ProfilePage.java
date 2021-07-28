@@ -10,16 +10,17 @@ import org.openqa.selenium.support.PageFactory;
 public class ProfilePage extends Infra {
 
     static WebElement article;
+
     public ProfilePage() {
         PageFactory.initElements(driver, this);
     }
 
     public void findArticleElement(String articleTitle) {
         //@FindBy(xpath = "//h1[contains(text(), '" + articleTitle + "') and @class='ng-binding']") WebElement title;
-        article = this.driver.findElement(By.xpath("//h1[contains(text(), '" + articleTitle + "') and @class='ng-binding']"));
+        article = driver.findElement(By.xpath("//h1[contains(text(), '" + articleTitle + "') and @class='ng-binding']"));
     }
 
-    public void goToArticlePage(){
+    public void goToArticlePage() {
         Extensions.click(article);
     }
 }

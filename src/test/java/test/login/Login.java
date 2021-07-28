@@ -14,8 +14,9 @@ public class Login extends Infra{
     SettingsPage objSettings;
 
     @BeforeMethod
-    public void setup() {
-        setupWebDriver();
+    @Parameters("browser")
+    public void setup(String browser) {
+        setupWebDriver(browser);
         objHome = new HomePage();
         objLogin = new LoginPage();
         objSettings = new SettingsPage();

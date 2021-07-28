@@ -13,31 +13,32 @@ public class LoginPage extends Infra {
     WebElement password;
     @FindBy(css = "button[type='submit']")
     WebElement login;
-    @FindBy(xpath = "//li[@class='ng-binding ng-scope']") WebElement invalidLogin;
+    @FindBy(xpath = "//li[@class='ng-binding ng-scope']")
+    WebElement invalidLogin;
 
-    public LoginPage(){
+    public LoginPage() {
         PageFactory.initElements(driver, this);
     }
 
-    public void setEmail(String strEmail){
+    public void setEmail(String strEmail) {
         Extensions.sendKeys(email, strEmail);
     }
 
-    public void setPassword(String strPassword){
+    public void setPassword(String strPassword) {
         Extensions.sendKeys(password, strPassword);
     }
 
-    public void clickLogin(){
+    public void clickLogin() {
         Extensions.scriptClick(login);
     }
 
-    public void login(String strEmail, String strPassword){
+    public void login(String strEmail, String strPassword) {
         this.setEmail(strEmail);
         this.setPassword(strPassword);
         this.clickLogin();
     }
 
-    public String getInvalidLoginText(){
+    public String getInvalidLoginText() {
         return Extensions.getText(invalidLogin).trim();
     }
 }

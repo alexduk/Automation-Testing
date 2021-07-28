@@ -1,10 +1,14 @@
 package common;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
@@ -24,11 +28,17 @@ public class Infra {
     public static String sArticleBody = "static article body";
     public static String sArticleTags = "static article tag";
 
-    public void setupWebDriver() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+    public void setupWebDriver(String browser) {
+        if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        }
+        else if (browser.equalsIgnoreCase("edge")) {
+            WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
+        }
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get(websiteUrl);
         webDriverWait = new WebDriverWait(driver, 5);
         executor = (JavascriptExecutor) driver;
@@ -37,7 +47,7 @@ public class Infra {
     @DataProvider(name = "testData")
     public Object[][] getData(Method m) {
         String testFileName = m.getDeclaringClass().getSimpleName();
-        String packageName = m.getDeclaringClass().getPackageName().substring(m.getDeclaringClass().getPackageName().indexOf(".")+1);
+        String packageName = m.getDeclaringClass().getPackageName().substring(m.getDeclaringClass().getPackageName().indexOf(".") + 1);
         ExcelUtils excel = new ExcelUtils("src/test/java/dataProvider/" + packageName + "/" + testFileName + ".xlsx", m.getName());
         int rowCount = excel.getRowCount();
         int colCount = excel.getColCount();
@@ -54,5 +64,10 @@ public class Infra {
         }
         String[][] data2d = data.stream().map(u -> u.toArray(new String[0])).toArray(String[][]::new);
         return data2d;
+    }
+
+    protected static void verifyElementExists(By selector) {
+        Boolean isPresent = driver.findElements(selector).size() > 0;
+        Assert.assertFalse(isPresent);
     }
 }

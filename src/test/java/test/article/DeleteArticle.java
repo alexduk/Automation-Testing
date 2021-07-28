@@ -4,6 +4,7 @@ import common.Infra;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageFactory.*;
 
@@ -16,8 +17,9 @@ public class DeleteArticle extends Infra {
     ProfilePage objProfile;
 
     @BeforeMethod
-    public void setup() {
-        setupWebDriver();
+    @Parameters("browser")
+    public void setup(String browser) {
+        setupWebDriver(browser);
         objHome = new HomePage();
         objLogin = new LoginPage();
         objArticle = new ArticlePage();
