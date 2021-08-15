@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" thread-count="1" parallel="tests">
-    <test name="ChromeTest">
-        <parameter name="browser" value="Chrome"/>
-        <classes>
-            <class name="test.login.Login"/>
-            <class name="test.article.NewArticle"/>
-            <class name="test.article.DeleteArticle"/>
-            <class name="test.article.EditArticle"/>
-            <class name="test.article.EditArticleTags"/>
-        </classes>
-    </test>
-    <test name="EdgeTest">
-        <parameter name="browser" value="Edge"/>
-        <classes>
-            <class name="test.login.Login"/>
-            <class name="test.article.NewArticle"/>
-            <class name="test.article.DeleteArticle"/>
-            <class name="test.article.EditArticle"/>
-            <class name="test.article.EditArticleTags"/>
-        </classes>
-    </test>
+<suite name="All Tests">
+    <listeners>
+        <listener class-name="common.Listener"/>
+    </listeners>
+    <suite-files>
+        <suite-file path="apiSuite.xml"/>
+        <suite-file path="seleniumSuite.xml"/>
+    </suite-files>
 </suite>

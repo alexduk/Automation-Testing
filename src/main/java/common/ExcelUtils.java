@@ -1,5 +1,6 @@
 package common;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -48,20 +49,20 @@ public class ExcelUtils {
         try {
             cellData = sheet.getRow(rowNum).getCell(colNum).getStringCellValue();
         } catch (Exception exp) {
-            System.out.println(exp.getMessage());
-            System.out.println(exp.getCause());
-            exp.printStackTrace();
+            cellData = String.valueOf(new DataFormatter().formatCellValue(sheet.getRow(rowNum).getCell(colNum)));
         }
         return cellData;
     }
 
-    public static void getCellDataNumber(int rowNum, int colNum) {
+    public static double getCellDataNumber(int rowNum, int colNum) {
+        double cellData = 0;
         try {
-            double cellData = sheet.getRow(rowNum).getCell(colNum).getNumericCellValue();
+            cellData = sheet.getRow(rowNum).getCell(colNum).getNumericCellValue();
         } catch (Exception exp) {
             System.out.println(exp.getMessage());
             System.out.println(exp.getCause());
             exp.printStackTrace();
         }
+        return cellData;
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Selenium Tests" thread-count="1" parallel="tests">
+    <test name="ChromeTest">
+        <parameter name="browser" value="Chrome"/>
+        <classes>
+            <class name="selenium.test.login.Login"/>
+        <!--    <class name="selenium.test.article.NewArticle"/>
+            <class name="selenium.test.article.DeleteArticle"/>
+            <class name="selenium.test.article.EditArticle"/>
+            <class name="selenium.test.article.EditArticleTags"/>-->
+        </classes>
+    </test>
+    <!--<test name="EdgeTest">
+        <parameter name="browser" value="Edge"/>
+        <classes>
+            <class name="selenium.test.login.Login"/>
+            <class name="selenium.test.article.NewArticle"/>
+            <class name="selenium.test.article.DeleteArticle"/>
+            <class name="selenium.test.article.EditArticle"/>
+            <class name="selenium.test.article.EditArticleTags"/>
+        </classes>
+    </test>-->
+</suite>
